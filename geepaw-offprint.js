@@ -3,12 +3,24 @@ const fs = require('fs').promises;
 const { promisify } = require('util');
 const rimraf = promisify(require('rimraf'));
 
+const script = `
+let el= document.querySelector("main");
+document.body.innerHTML="";
+document.body.appendChild(el);
+`;
+
+const style = `
+form {display: none;}
+.hustle-ui {display: none;}
+#comments {display: none;}
+`;
+
 async function printPDF(url, to) {
   const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
   await page.goto(url, {waitUntil: 'networkidle0'});
-  await page.addScriptTag({content: `let el= document.querySelector("main"); document.body.innerHTML=""; document.body.appendChild(el)`});
-  await page.addStyleTag({content: `form {display: none;}`});
+  await page.addScriptTag({content: script});
+  await page.addStyleTag({content: style});
   const pdf = await page.pdf({ format: 'A4' });
  
   await browser.close();
