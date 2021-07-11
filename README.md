@@ -1,6 +1,6 @@
 # Synopsis
 
-Create a printable PDF containing posts on geepawhill.org
+Create a printable PDF of posts on geepawhill.org
 
 # Installation
 
