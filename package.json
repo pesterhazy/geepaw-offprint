@@ -4,7 +4,8 @@
   "description": "",
   "main": "geepaw-offprint.js",
   "scripts": {
-    "start": "node geepaw-offprint.js"
+    "start": "node geepaw-offprint.js",
+    "merge": "docker run -v $PWD:/workdir --workdir /workdir gkmr/pdf-tools pdftk out/*.pdf cat output out.pdf"
   },
   "author": "",
   "license": "ISC",
