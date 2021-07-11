@@ -34,7 +34,8 @@ async function main() {
   const urls = (await fs.readFile("urls.txt", "utf8")).split(/\n/).filter(s => s);
 
   for (const [idx, url] of urls.entries()) {
-    const to = `out/${idx}.pdf`;
+    const padIdx = String(idx).padStart(4, '0');
+    const to = `out/${padIdx}.pdf`;
     console.log(url);
     await printPDF(url, to);
     console.log(to);
