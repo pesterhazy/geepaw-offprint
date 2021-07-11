@@ -1,8 +1,8 @@
 const puppeteer = require('puppeteer');
 const fs = require('fs').promises;
+const { promisify } = require('util');
+const rimraf = promisify(require('rimraf'));
 
-
- 
 async function printPDF(url, to) {
   const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
@@ -16,6 +16,9 @@ async function printPDF(url, to) {
 }
 
 async function main() {
+  await rimraf("out");
+  await fs.mkdir("out");
+
   const urls = (await fs.readFile("urls.txt", "utf8")).split(/\n/).filter(s => s);
 
   for (const [idx, url] of urls.entries()) {
